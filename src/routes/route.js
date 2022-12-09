@@ -6,7 +6,8 @@ const _ = require('underscore')
 const welcome1 = require('../logger/logger')
 const currentDate = require('../util/helper')
 const str1 = require('../validator/formatter')
-const lodash = require('lodash')
+const lodash = require('lodash');
+//const { result } = require('underscore');
 
 router.get('/test-me', function(req, res) {
     // console.log("email from introduction module", intro.myEmail)
@@ -58,6 +59,12 @@ router.get('/test-me', function(req, res) {
 router.get('/test-you', function(req, res) {
     console.log("I am here")
     res.send("very important text")
+})
+
+router.get('/movies', function(req, res) {
+    let arr = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
+
+    res.send("movies list=> " + arr)
 })
 
 
