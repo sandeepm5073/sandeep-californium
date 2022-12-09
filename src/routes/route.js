@@ -7,6 +7,7 @@ const welcome1 = require('../logger/logger')
 const currentDate = require('../util/helper')
 const str1 = require('../validator/formatter')
 const lodash = require('lodash');
+const { response } = require('express');
 //const { result } = require('underscore');
 
 router.get('/test-me', function(req, res) {
@@ -29,6 +30,7 @@ router.get('/test-me', function(req, res) {
         'August', 'September', 'October', 'November', 'December'
     ];
     console.log(lodash.chunk(arr, 4));
+
     const arr1 = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
     let newArray = lodash.tail(arr1);
     console.log(newArray);
@@ -60,12 +62,5 @@ router.get('/test-you', function(req, res) {
     console.log("I am here")
     res.send("very important text")
 })
-
-router.get('/movies', function(req, res) {
-    let arr = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
-
-    res.send("movies list=> " + arr)
-})
-
 
 module.exports = router;
