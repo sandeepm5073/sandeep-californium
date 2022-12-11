@@ -3,17 +3,20 @@ const router = express.Router();
 const intro = require('./introduction')
 const employee = require('./employee')
 const _ = require('underscore')
-const mentorModule = require('../abc/xyz/myModule'); 
+const mentorModule = require('../abc/xyz/myModule');
 const req = require('express/lib/request');
 const { route } = require('express/lib/application');
+const { contains } = require('underscore');
+const films = require('../films/films')
 
 
-router.get("/profile-details", function(req, res){
+router.get("/profile-details", function(req, res) {
     // Write the LOGIC here
+
     res.send('dummy response')
 })
 
-router.get('/test-me', function (req, res) {
+router.get('/test-me', function(req, res) {
     console.log("email from introduction module", intro.myEmail)
     intro.myFunction('Sabiha')
     console.log("email from employee module", employee.myEmail)
@@ -27,18 +30,18 @@ router.get('/test-me', function (req, res) {
 });
 
 
-router.get('/test-me', function(req, res){
+router.get('/test-me', function(req, res) {
     console.log("I am here")
     res.send("any dummy text from route handler 2")
 })
 
-router.get('/students', function (req, res){
+router.get('/students', function(req, res) {
     let students = ['Sabiha', 'Neha', 'Akash']
     res.send(students)
 })
 
 // PATH Param example
-router.get('/student-details/:name', function(req, res){
+router.get('/student-details/:name', function(req, res) {
     /*
     params is an attribute inside request that contains 
     dynamic values.
@@ -51,27 +54,57 @@ router.get('/student-details/:name', function(req, res){
 
     // JSON strigify function helps to print an entire object
     // We can use many ways to print an object in Javascript, JSON stringify is one of them
-    console.log("This is the request "+ JSON.stringify(requestParams))
+    console.log("This is the request " + JSON.stringify(requestParams))
     let studentName = requestParams.name
     console.log('Name of the student is ', studentName)
-    
+
     res.send('Dummy response')
 })
 
 // PATH Param example
-router.get("/profile/:name", function(req, res){
-    console.log('Printing the request to find out wjere name is stored',req.params)
-    console.log('user name is',req.params.name)
-    //console.log(`User requesting for profile is ${name}`)
+router.get("/profile/:name", function(req, res) {
+    console.log('Printing the request to find out wjere name is stored', req.params)
+    console.log('user name is', req.params.name)
+        //console.log(`User requesting for profile is ${name}`)
     res.send("dummy details")
 })
 
 // Query Param example
-router.get("/shoes", function(req, res){
-    console.log("The filter options for shoes are -",req.query)
-    //req.query.size
-    //req.query.brand
+router.get("/shoes", function(req, res) {
+    console.log("The filter options for shoes are -", req.query)
+    console.log(req.query.size)
+    console.log(req.query.brand)
     res.send("dummy shoes response")
 })
+router.get('/movies', function(req, res) {
+
+
+    let arr = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
+
+    res.send("movies list=> " + arr)
+})
+
+router.get('/movies/:indexNumber', function(req, res) {
+    let arr = ['Rang de basanti', 'The shining', 'Lord of the rings', 'Batman begins']
+    let movie = req.params.indexNumber
+    if (arr[movie] !== undefined) {
+        console.log("indexNumber movie", arr[movie])
+    } else {
+        console.log("Please use a valid indexnumber ")
+    }
+    res.send("movie list")
+
+})
+
+router.get('/films/', function(req, res) {
+    res.send(films.films)
+})
+
+router.get('/films2/:i', function(req, res) {
+
+    console.log(films.films2(req.params.i))
+    res.send("movie list")
+})
+
 
 module.exports = router;
