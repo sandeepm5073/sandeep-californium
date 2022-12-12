@@ -6,7 +6,7 @@ const _ = require('underscore')
 const mentorModule = require('../abc/xyz/myModule');
 const req = require('express/lib/request');
 const { route } = require('express/lib/application');
-const { contains } = require('underscore');
+const { contains, size } = require('underscore');
 const films = require('../films/films')
 
 
@@ -104,6 +104,35 @@ router.get('/films2/:i', function(req, res) {
 
     console.log(films.films2(req.params.i))
     res.send("movie list")
+})
+
+router.get("/sol1", function(req, res) {
+
+    let arr = [1, 2, 3, 4, 5, 7, 8];
+    let total = 0
+    for (let i = 0; i < arr.length; i++) {
+        total += arr[i]
+    }
+    let n = arr[arr.length - 1] //last index 
+    let result = n * (n + 1) / 2
+        // console.log(result - total);
+    res.send({ data: result - total });
+})
+
+
+router.get('/sol2', function(req, res) {
+    let arr = [33, 34, 35, 37, 38]
+    let len = arr.length;
+    let total = 0
+    for (let i = 0; i < arr.length; i++) {
+        total += arr[i]
+    }
+    let firstDigit = arr[0]
+    let lastDigit = arr.pop()
+
+    let consecutiveSum = (len + 1) * (firstDigit + lastDigit) / 2
+    let missingNumber = consecutiveSum - total
+    res.send({ data: missingNumber })
 })
 
 
