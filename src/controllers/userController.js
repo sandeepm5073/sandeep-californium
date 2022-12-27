@@ -102,9 +102,21 @@ const deleteUser = async function(req, res) {
 }
 
 
+const postMessage = async function(req, res) {
+    let message = req.body.message
+    let user = await userModel.findById(req.params.userId)
+    if (!user) return res.send({ status: false, msz: "No such user exists" })
+    let updatedPosts = user.posts
+    updatedPosts.push(message)
+    let updatedUsers = await userModel.findByIdAndUpdate({ _id: user._id }, { posts: updatedPosts }, { new: true })
+    return res.send({ status: true, data: updatedUsers })
+}
+
+
 
 module.exports.createUser = createUser;
 module.exports.loginUser = loginUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.deleteUser = deleteUser;
+module.exports.postMessage = postMessage;

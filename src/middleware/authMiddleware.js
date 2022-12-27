@@ -9,8 +9,16 @@ const auth = function logMethod(req, res, next) {
             })
             // Decode token
     let decodedToken = jwt.verify(token, "sandeepmaurya");
+    console.log(decodedToken)
     if (!decodedToken)
         return res.send({ status: false, msg: "token is invalid" });
+
+    // compare valid token or not |
+    let userToBeModified = req.params.userId
+    let userLoggedIn = decodedToken.userId
+
+    if (userToBeModified != userLoggedIn)
+        return res.send({ status: false, msz: "User and user's-token in not matched" })
     next()
 }
 

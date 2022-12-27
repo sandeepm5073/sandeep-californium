@@ -13,6 +13,7 @@ router.post("/login", userController.loginUser)
 router.get("/users/:userId", authMW.auth, userController.getUserData)
 router.put("/users/:userId", authMW.auth, userController.updateUser)
 router.delete("/users/:userId", authMW.auth, userController.deleteUser)
+router.post("/users/:userId/posts", authMW.auth, userController.postMessage)
 
 
 
