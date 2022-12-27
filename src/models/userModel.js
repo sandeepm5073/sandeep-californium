@@ -1,22 +1,23 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema( {
-    name: String,
-    balance: {
-        type:Number,
-        default: 100,
-        
+const userSchema = new mongoose.Schema({
+    firstName: String,
+    lastName: String,
+    mobile: {
+        type: String,
+        required: true
     },
-    address: String,
-    age: Number,
+    emailId: String,
+    password: String,
     gender: {
         type: String,
-        enum: ["male","female","other"]
+        enum: ["male", "female", "others"]
     },
-    isFreeAppUser: {
-        type: Boolean,
+    isDeleted: {
+        type: String,
         default: false
-    }
+    },
+    age: Number,
 }, { timestamps: true });
 
-module.exports = mongoose.model('sabihasUsers', userSchema)
+module.exports = mongoose.model('Users', userSchema)
